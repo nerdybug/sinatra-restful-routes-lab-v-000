@@ -66,24 +66,24 @@ describe "Recipe App" do
     before do
       get "/recipes/#{@recipe1.id}/edit"
     end
-  
+
     it 'responds with a 200 status code' do
       expect(last_response.status).to eq(200)
     end
-  
+
     it "contains a form to edit the recipe" do
       expect(last_response.body).to include("</form>")
-  
+
     end
-  
+
     it "displays the recipe's ingredients before editing" do
       expect(last_response.body).to include(recipe_ingredients)
     end
-  
+
     it "submits via a patch request" do
       expect(last_response.body).to include('<input id="hidden" type="hidden" name="_method" value="patch">')
     end
-  
+
   end
 
   describe "new page '/recipes/new'" do
@@ -134,7 +134,7 @@ describe "Recipe App" do
       fill_in "cook_time", :with => "30 minutes"
       click_button "submit"
     end
-  
+
     it "redirects to the recipe show page" do
       expect(page.current_path).to eq("/recipes/#{@cookie.id}")
       expect(page).to have_content("Double chocolate chip cookies")
@@ -142,7 +142,7 @@ describe "Recipe App" do
       expect(page).to have_content("30 minutes")
     end
   end
-  
+
   describe "deleting a recipe" do
     before do
       @cookie = Recipe.create(
@@ -153,7 +153,7 @@ describe "Recipe App" do
       visit  "/recipes/#{@cookie.id}"
       click_button "delete"
     end
-  
+
     it "deletes a recipe" do
       expect(Recipe.find_by_id(@cookie.id)).to eq(nil)
     end
