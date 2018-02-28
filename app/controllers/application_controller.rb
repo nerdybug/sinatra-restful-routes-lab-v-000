@@ -1,3 +1,4 @@
+require 'uri'
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -16,7 +17,9 @@ class ApplicationController < Sinatra::Base
 
   post '/recipes' do
     @recipe = Recipe.create(name: params[:name], ingredients: params[:ingredients], cook_time: params[:cook_time])
-    redirect '/recipes/#{@recipe.id}'
+    url = '/recipes/#{@recipe.id}'
+    # URI.encode(url)
+    redirect URI.encode(url)
   end
 
   get '/recipes/new' do
