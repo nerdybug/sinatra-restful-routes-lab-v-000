@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
     # url = '/recipes/#{@recipe.id}'
     # # URI.encode(url)
     # redirect URI.encode(url)
-    redirect '/recipes/{@recipe.id}'
+    redirect '/recipes/@recipe.id'
   end
 
   get '/recipes/new' do
